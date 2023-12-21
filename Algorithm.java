@@ -96,9 +96,57 @@ public class Algorithm
     }
     public boolean hasConsecutive(int[] array)
     {
-        for (int i)
+        int prevElement = array[0];
+        for (int i = 1; i < array.length; i++)
         {
-
+            if (prevElement == array[i]) return true;
+            prevElement = array[i];
         }
+        return false;
+    }
+    public int negIndx(int[] array)
+    {
+        int indx = 0;
+        for (int i : array)
+        {
+            if (i < 0) return indx;
+            indx ++;
+        }
+        return -1;
+    }
+    public boolean hasEquivalentNums(int[] array)
+    {
+        for (int i = 0; i < array.length - 1; i++)
+        {
+            for (int j = i + 1; j < array.length; j++)
+            {
+                if (array[i] == array[j]) return true;
+            }
+        }
+        return false;
+    }
+    public int longestStreak(int[] array, int x)
+    {
+        int currentStreak = 0;
+        int maxStreak = 0;
+        for (int i : array)
+        {
+            if (i == x)
+            {
+                currentStreak++;
+                if (currentStreak > maxStreak) maxStreak = currentStreak;
+            }
+            else currentStreak = 0;
+        }
+        return maxStreak;
+    }
+    public String lastWord(String[] array)
+    {
+        String last = array[0];
+        for (String i : array)
+        {
+            if (i.compareTo(last) > 0) last = i;
+        }
+        return last;
     }
 }
