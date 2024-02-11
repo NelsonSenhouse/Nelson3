@@ -4,18 +4,35 @@ public class Main
 {
     public static void main(String[] args)
     {
-        ArrayList list = new ArrayList();
-        list.add(100);
-        list.add(200.0);
-        list.add(true);
-        list.add("apple");
+        ArrayList<Integer> nums = new ArrayList<>();
+        nums.add(1); nums.add(2); nums.add(3); nums.add(2); nums.add(4); nums.add(2); nums.add(2); nums.add(5);
 
-        System.out.println(list.size());
-        System.out.println(list.add("tree"));
-        list.add(4, "pie");
-        System.out.println(list.get(3));
-        System.out.println(list.set(1, 200.1));
-        System.out.println(list.remove(0));
-        System.out.println(list);
+        for (int i = 0; i < nums.size(); i++)
+        {
+            System.out.print(nums.get(i) + " ");
+        }
+        System.out.println();
+        int j = 0;
+        while (j < nums.size())
+        {
+            System.out.print(nums.get(j) + " ");
+            j++;
+        }
+        System.out.println();
+        for (int k : nums)
+        {
+            System.out.print(k + " ");
+        }
+        System.out.println();
+
+        removeNum(nums, 2);
+        System.out.println(nums);
+    }
+    public static void removeNum(ArrayList<Integer> list, int target)
+    {
+        for (int i = list.size() - 1; i >= 0; i--)
+        {
+            if (list.get(i) == target) list.remove(i);
+        }
     }
 }
