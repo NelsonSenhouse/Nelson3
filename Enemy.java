@@ -13,6 +13,7 @@ public class Enemy
     public Enemy()
     {
         img = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\alienenemy.gif");
+//        img = new ImageIcon("alienenemy.gif");
         image = new JLabel("", img, JLabel.CENTER);
         x = Game.windowWidth + img.getIconWidth() * 2;
         y = (int) (Math.random() * (Game.windowHeight - getHeight()));

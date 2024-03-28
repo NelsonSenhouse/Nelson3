@@ -8,6 +8,7 @@ public class Game extends JFrame implements ActionListener
 {
     public static JLabel background;
     public static ImageIcon bg = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\space.gif");
+//    public static ImageIcon bg = new ImageIcon("space.gif");
     public static int windowWidth = bg.getIconWidth();
     public static int windowHeight = bg.getIconHeight() - 50;
     public static Player p1 = new Player();
@@ -120,37 +121,13 @@ public class Game extends JFrame implements ActionListener
 
     public void checkIfHit()
     {
-//        for (int i = 0; i < plIndx; i++)
-//        {
-//            for (Enemy[] row : enemies)
-//            {
-//                for (int j = 0; j < row.length; j++)
-//                {
-//                    if (playersLasers.get(i).collided(row[j]))
-//                    {
-//                        row[j].damaged();
-//                        System.out.println("damaged");
-//                        p1.takeDamage();
-//                    }
-//                }
-//            }
-//        }
-//        for (int i = 0; i < enemies.length; i++)
-//        {
-//            for (int j = 0; j < enemies[i].length; j++)
-//            {
-//                for (int k = 0; k < playersLasers.size(); k++)
-//                {
-//                    playersLasers.get(k).collided(enemies[i][j]);
-//                    if (playersLasers.get(k).getCollide())
-//                    {
-//                        enemies[i][j].damaged();
-//                        System.out.println("damaged");
-//                    }
-//                }
-//                if (enemies[i][j].getX() < p1.getWidth() / 2) running = false;
-//            }
-//        }
+        for (int i = 0; i < enemies.length; i++)
+        {
+            for (int j = 0; j < enemies[i].length; j++)
+            {
+                if (enemies[i][j].getX() < p1.getWidth() / 2) running = false;
+            }
+        }
         for (int i = 0; i < playersLasers.size(); i++)
         {
             if (playersLasers.get(i).collided() != null) playersLasers.get(i).collided().damaged();
@@ -168,7 +145,6 @@ public class Game extends JFrame implements ActionListener
         {
             running = false;
         }
-//        if (re1.getX() < p1.getX() + p1.getWidth() / 2) running = false;
 
     }
 
