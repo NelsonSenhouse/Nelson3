@@ -12,7 +12,7 @@ public class Enemy
 
     public Enemy()
     {
-        img = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\enemy.png");
+        img = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\alienenemy.gif");
         image = new JLabel("", img, JLabel.CENTER);
         x = Game.windowWidth + img.getIconWidth() * 2;
         y = (int) (Math.random() * (Game.windowHeight - getHeight()));
@@ -47,16 +47,22 @@ public class Enemy
 
     public void die()
     {
-        x = Game.windowWidth - img.getIconWidth() * 2;
+        ImageIcon explosion = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\explosion.gif");
+        JLabel label = new JLabel("", explosion, JLabel.CENTER);
+        label.setBounds(x, y, explosion.getIconWidth(), explosion.getIconHeight());
+        label.setVisible(true);
+        Game.background.add(label);
+        x = Game.windowWidth + img.getIconWidth() * 2;
         y = (int) (Math.random() * (Game.windowHeight - getHeight()));
         image.setBounds(x, y, img.getIconWidth(), img.getIconHeight());
         image.setVisible(true);
-        reset();
+        reset(label);
     }
 
-    public void reset()
+    public void reset(JLabel jl)
     {
         life = 2;
+        Game.background.remove(jl);
     }
 
     public void damaged()

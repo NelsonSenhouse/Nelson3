@@ -1,13 +1,15 @@
 import javax.swing.*;
+import java.util.prefs.BackingStoreException;
 
 public class Player
 {
-    private ImageIcon img = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\ship.png");
+    private ImageIcon img = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\spaceship.gif");
     private JLabel image;
     private int score;
     private int x;
     private int y = Game.windowHeight / 2;
     private int life = 3;
+    private boolean dead = false;
 
     public Player()
     {
@@ -39,8 +41,30 @@ public class Player
     {
         Laser laser = new Laser(x + img.getIconWidth() - 30, y + img.getIconHeight() / 2 - 10);
         Game.background.add(laser.getImage());
-//        laser.move();
         return laser;
+    }
+
+    public void takeDamage()
+    {
+        life--;
+        if(life == 0) die();
+    }
+
+    public void die()
+    {
+        ImageIcon explosion = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\explosion.gif");
+        JLabel label = new JLabel("", explosion, JLabel.CENTER);
+        label.setBounds(x, y, explosion.getIconWidth(), explosion.getIconHeight());
+        label.setVisible(true);
+        Game.background.add(label);
+//        Game.background.remove(label);
+        image.setVisible(false);
+        dead = true;
+    }
+
+    public boolean getDead()
+    {
+        return dead;
     }
 
     public void updateScore()

@@ -50,9 +50,24 @@ public class Laser
         }
     }
 
-    public boolean collided(Enemy enemy)
+    public Enemy collided()
     {
-        if ((enemy.getX() < x && x < enemy.getX() + enemy.getWidth()) && (enemy.getY() < y && y < enemy.getY() + enemy.getHeight())) collide = true;
+        for (Enemy[] row : Game.enemies)
+        {
+            for (int i = 0; i < row.length; i++)
+            {
+                if ((row[i].getX() < x && x < row[i].getX() + row[i].getWidth()) && (row[i].getY() < y && y < row[i].getY() + row[i].getHeight()))
+                {
+                    collide = true;
+                    return row[i];
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean getCollide()
+    {
         return collide;
     }
 

@@ -21,10 +21,10 @@ public class Game extends JFrame implements ActionListener
                                         {mb1, new Miniboss(), new Miniboss()}};
     public static int eIndx1 = 0;
     public static int eIndx2 = 0;
-    private int delay = 30;
+    private int delay = 20;
     private int prev = NewKeyAdapter.shoot;
     private Timer timer;
-    private int time;
+    public static int time;
     private boolean running = true;
     int hits = 0;
 
@@ -56,11 +56,11 @@ public class Game extends JFrame implements ActionListener
     {
         if (time > 0)
         {
-//            if (time % 3000 == 0 && eIndx1 < enemies[0].length) {
-//                background.add(enemies[0][eIndx1].getImage());
-//                eIndx1++;
-//                System.out.println(("new reg"));
-//            }
+            if (time % 3000 == 0 && eIndx1 < enemies[0].length) {
+                background.add(enemies[0][eIndx1].getImage());
+                eIndx1++;
+                System.out.println(("new reg"));
+            }
 
             if (time % 5000 == 0 && eIndx2 < enemies[1].length)
             {
@@ -94,12 +94,9 @@ public class Game extends JFrame implements ActionListener
             plIndx++;
             prev = NewKeyAdapter.shoot;
         }
-        if (plIndx > -1)
+        for (int i = 0; i < playersLasers.size(); i++)
         {
-            for (int i = 0; i < playersLasers.size(); i++)
-            {
-                playersLasers.get(i).move();
-            }
+            playersLasers.get(i).move();
         }
     }
 
@@ -109,7 +106,7 @@ public class Game extends JFrame implements ActionListener
         {
             for (int i = 0; i < eIndx2; i++)
             {
-                Laser l = new Laser(enemies[1][i].getX(), enemies[1][i].getY() + enemies[1][i].getHeight() / 2);
+                Laser l = new Laser(enemies[1][i].getX(), enemies[1][i].getY() + enemies[1][i].getHeight() / 2 - 10);
                 background.add(l.getImage());
                 enemyLasers.add(0, l);
                 elIndx++;
@@ -123,20 +120,55 @@ public class Game extends JFrame implements ActionListener
 
     public void checkIfHit()
     {
-        for (int i = 0; i < plIndx; i++)
+//        for (int i = 0; i < plIndx; i++)
+//        {
+//            for (Enemy[] row : enemies)
+//            {
+//                for (int j = 0; j < row.length; j++)
+//                {
+//                    if (playersLasers.get(i).collided(row[j]))
+//                    {
+//                        row[j].damaged();
+//                        System.out.println("damaged");
+//                        p1.takeDamage();
+//                    }
+//                }
+//            }
+//        }
+//        for (int i = 0; i < enemies.length; i++)
+//        {
+//            for (int j = 0; j < enemies[i].length; j++)
+//            {
+//                for (int k = 0; k < playersLasers.size(); k++)
+//                {
+//                    playersLasers.get(k).collided(enemies[i][j]);
+//                    if (playersLasers.get(k).getCollide())
+//                    {
+//                        enemies[i][j].damaged();
+//                        System.out.println("damaged");
+//                    }
+//                }
+//                if (enemies[i][j].getX() < p1.getWidth() / 2) running = false;
+//            }
+//        }
+        for (int i = 0; i < playersLasers.size(); i++)
         {
-            for (Enemy[] row : enemies)
+            if (playersLasers.get(i).collided() != null) playersLasers.get(i).collided().damaged();
+        }
+        for (int i = 0; i < enemyLasers.size(); i++)
+        {
+            if ((p1.getX() < enemyLasers.get(i).getX() && enemyLasers.get(i).getX() < p1.getX() + p1.getWidth()) &&
+                    (p1.getY() < enemyLasers.get(i).getY() && enemyLasers.get(i).getY() < p1.getY() + p1.getHeight()))
             {
-                for (int j = 0; j < row.length; j++)
-                {
-                    if (playersLasers.get(i).collided(row[j]))
-                    {
-                        row[j].damaged();
-                    }
-                }
+                p1.takeDamage();
+
             }
         }
-        if (re1.getX() < p1.getX() + p1.getWidth() / 2) running = false;
+        if(p1.getDead())
+        {
+            running = false;
+        }
+//        if (re1.getX() < p1.getX() + p1.getWidth() / 2) running = false;
 
     }
 
@@ -145,7 +177,6 @@ public class Game extends JFrame implements ActionListener
         if (running)
         {
             time += delay;
-            System.out.println(time);
             p1.move(NewKeyAdapter.direction);
             playerShoot();
             enemyShoot();
@@ -154,6 +185,37 @@ public class Game extends JFrame implements ActionListener
             createEnemies();
             moveEnemies();
 //            re1.move();
+        }
+        else
+        {
+            background.remove(p1.getImage());
+            for (Enemy[] row : enemies)
+            {
+                for (int i = 0; i < row.length; i++)
+                {
+                    background.remove(row[i].getImage());
+                }
+            }
+            for (Laser l : playersLasers)
+            {
+                background.remove(l.getImage());
+            }
+            for (Laser l : enemyLasers)
+            {
+                background.remove(l.getImage());
+            }
+            JLabel end = new JLabel("Game Over!", JLabel.CENTER);
+            JLabel end2 = new JLabel("Your Score: " + p1.getScore(), JLabel.CENTER);
+            end.setForeground(Color.white);
+            end.setFont(new Font("IMPACT", Font.PLAIN, 90));
+            end.setBounds(0, 0, windowWidth, windowHeight);
+            end.setVisible(true);
+            end2.setForeground(Color.white);
+            end2.setFont(new Font("IMPACT", Font.PLAIN, 90));
+            end2.setBounds(0, 90, windowWidth, windowHeight);
+            end2.setVisible(true);
+            background.add(end);
+            background.add(end2);
         }
     }
 }
