@@ -4,7 +4,6 @@ public class Miniboss extends Enemy
     public Miniboss()
     {
         super("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\miniboss.gif");
-//        super("miniboss.gif");
     }
 
     public void move()
@@ -14,7 +13,7 @@ public class Miniboss extends Enemy
 
     public String toString()
     {
-        return "This miniboss has " + speed + "speed";
+        return "This miniboss has " + speed + " speed";
     }
 
     public boolean equals(Miniboss other)

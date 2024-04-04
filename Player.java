@@ -1,10 +1,8 @@
 import javax.swing.*;
-import java.util.prefs.BackingStoreException;
 
 public class Player
 {
     private ImageIcon img = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\spaceship.gif");
-//    private ImageIcon img = new ImageIcon("spaceship.gif");
     private JLabel image;
     private int score;
     private int x;
@@ -54,12 +52,10 @@ public class Player
     public void die()
     {
         ImageIcon explosion = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\explosion.gif");
-//        ImageIcon explosion = new ImageIcon("explosion.gif");
         JLabel label = new JLabel("", explosion, JLabel.CENTER);
         label.setBounds(x, y, explosion.getIconWidth(), explosion.getIconHeight());
         label.setVisible(true);
         Game.background.add(label);
-//        Game.background.remove(label);
         image.setVisible(false);
         dead = true;
     }

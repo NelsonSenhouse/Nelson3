@@ -13,7 +13,7 @@ public class RegEnemy extends Enemy
 
     public String toString()
     {
-        return "This regular enemy has " + speed + "speed";
+        return "This regular enemy has " + speed + " speed";
     }
 
     public boolean equals(RegEnemy other)

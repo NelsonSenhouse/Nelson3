@@ -9,11 +9,11 @@ public class Enemy
     private int x;
     private int y;
     private int life;
+    private int randVar;
 
     public Enemy()
     {
         img = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\alienenemy.gif");
-//        img = new ImageIcon("alienenemy.gif");
         image = new JLabel("", img, JLabel.CENTER);
         x = Game.windowWidth + img.getIconWidth() * 2;
         y = (int) (Math.random() * (Game.windowHeight - getHeight()));
@@ -21,6 +21,7 @@ public class Enemy
         image.setVisible(true);
         type = "regular";
         life = 2;
+        randVar = (int)(Math.random() * 10 + 1);
     }
 
     public Enemy(String label)
@@ -99,6 +100,16 @@ public class Enemy
     public int getHeight()
     {
         return img.getIconHeight();
+    }
+
+    public int getLife()
+    {
+        return life;
+    }
+
+    public int getRandVar()
+    {
+        return randVar;
     }
 
     public String toString()

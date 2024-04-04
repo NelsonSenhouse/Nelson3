@@ -3,7 +3,6 @@ import javax.swing.*;
 public class Laser
 {
     private ImageIcon img = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\laser.png");
-//    private ImageIcon img = new ImageIcon("laser.png");
     private JLabel image;
     private int x;
     private int y;

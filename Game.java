@@ -8,7 +8,6 @@ public class Game extends JFrame implements ActionListener
 {
     public static JLabel background;
     public static ImageIcon bg = new ImageIcon("C:\\Users\\nsenh\\IdeaProjects\\MP3 Project\\src\\space.gif");
-//    public static ImageIcon bg = new ImageIcon("space.gif");
     public static int windowWidth = bg.getIconWidth();
     public static int windowHeight = bg.getIconHeight() - 50;
     public static Player p1 = new Player();
@@ -38,16 +37,12 @@ public class Game extends JFrame implements ActionListener
         background = new JLabel("", bg, JLabel.CENTER);
         background.setBounds(0, 0, windowWidth, windowHeight);
         add(background);
-//        JLabel scoreLabel = new JLabel("Score");
-//        scoreLabel.setBounds(0, 0, 100, 100);
-//        add(scoreLabel);
         setVisible(true);
         start();
     }
 
     public void start()
     {
-//        background.add(re1.getImage());
         background.add(p1.getImage());
         timer = new Timer(delay, this);
         timer.start();
@@ -156,11 +151,9 @@ public class Game extends JFrame implements ActionListener
             p1.move(NewKeyAdapter.direction);
             playerShoot();
             enemyShoot();
-//            System.out.println(hits);
             checkIfHit();
             createEnemies();
             moveEnemies();
-//            re1.move();
         }
         else
         {
@@ -192,6 +185,7 @@ public class Game extends JFrame implements ActionListener
             end2.setVisible(true);
             background.add(end);
             background.add(end2);
+
         }
     }
 }
